@@ -93,7 +93,7 @@ export default function Team() {
                                 </p>
                             </div>
                         </motion.div>
-                    ))};
+                    ))}
                 </div>
             </section>
         </div>
