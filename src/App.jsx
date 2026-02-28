@@ -11,6 +11,7 @@ import About from "./pages/AboutUs";
 import ProductDetails from "./pages/ProductDetails";
 import ScrollToTop from "./components/ScrollToTop";
 import Packing from "./pages/Packing";
+import Team from "./pages/Team";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/packing" element={<Packing />} />
+          <Route path="/team" element={<Team />} />
         </Routes>
       </main>
 
