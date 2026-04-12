@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Enquiry() {
     const [formData, setFormData] = useState({
@@ -7,6 +7,22 @@ export default function Enquiry() {
         phone: "",
         message: "",
     });
+    const [status, setStatus] = useState({
+        type: "",
+        message: "",
+    });
+
+    useEffect(() => {
+        if (!status.message) {
+            return undefined;
+        }
+
+        const timer = window.setTimeout(() => {
+            setStatus({ type: "", message: "" });
+        }, 2000);
+
+        return () => window.clearTimeout(timer);
+    }, [status]);
 
     const handleChange = (e) => {
         setFormData({
@@ -19,18 +35,31 @@ export default function Enquiry() {
         e.preventDefault();
         const API_URL = import.meta.env.VITE_API_URL || "";
 
-        const response = await fetch(`${API_URL}/api/send-enquiry`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
+        try {
+            const response = await fetch(`${API_URL}/api/send-enquiry`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
 
-        if (response.ok) {
-            alert("Enquiry sent successfully!");
-        } else {
-            alert("Failed to send enquiry.");
+            if (response.ok) {
+                setStatus({
+                    type: "success",
+                    message: "Enquiry sent successfully."
+                });
+            } else {
+                setStatus({
+                    type: "error",
+                    message: "Failed to send enquiry."
+                });
+            }
+        } catch {
+            setStatus({
+                type: "error",
+                message: "Failed to send enquiry."
+            });
         }
 
         setFormData({
@@ -49,6 +78,21 @@ export default function Enquiry() {
             <h2 className="text-2xl font-bold text-center">
                 Send Us an Enquiry
             </h2>
+
+            <div
+                className={`rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 ${
+                    status.message
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 -translate-y-1 pointer-events-none h-0 p-0"
+                } ${
+                    status.type === "success"
+                        ? "bg-green-100 text-green-800 border border-green-200"
+                        : "bg-red-100 text-red-700 border border-red-200"
+                }`}
+                aria-live="polite"
+            >
+                {status.message}
+            </div>
 
             <div>
                 <label className="block font-medium mb-1">Full Name</label>
