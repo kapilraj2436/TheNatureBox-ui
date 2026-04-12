@@ -17,8 +17,9 @@ export default function Enquiry() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const API_URL = import.meta.env.VITE_API_URL || "";
 
-        const response = await fetch("http://localhost:5001/send-enquiry", {
+        const response = await fetch(`${API_URL}/api/send-enquiry`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
