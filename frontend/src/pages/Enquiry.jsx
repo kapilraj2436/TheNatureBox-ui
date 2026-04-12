@@ -79,21 +79,6 @@ export default function Enquiry() {
                 Send Us an Enquiry
             </h2>
 
-            <div
-                className={`rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 ${
-                    status.message
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 -translate-y-1 pointer-events-none h-0 p-0"
-                } ${
-                    status.type === "success"
-                        ? "bg-green-100 text-green-800 border border-green-200"
-                        : "bg-red-100 text-red-700 border border-red-200"
-                }`}
-                aria-live="polite"
-            >
-                {status.message}
-            </div>
-
             <div>
                 <label className="block font-medium mb-1">Full Name</label>
                 <input
@@ -139,6 +124,21 @@ export default function Enquiry() {
                     onChange={handleChange}
                     className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-green-600 outline-none"
                 />
+            </div>
+
+            <div
+                className={`rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 ${
+                    status.message
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 -translate-y-1 pointer-events-none h-0 p-0"
+                } ${
+                    status.type === "success"
+                        ? "bg-green-100 text-green-800 border border-green-200"
+                        : "bg-red-100 text-red-700 border border-red-200"
+                }`}
+                aria-live="polite"
+            >
+                {status.message}
             </div>
 
             <button
