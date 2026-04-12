@@ -15,13 +15,23 @@ export default function Enquiry() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        const API_URL = import.meta.env.VITE_API_URL || "";
 
-        // Later: send to backend / email
-        console.log("Enquiry Submitted:", formData);
+        const response = await fetch(`${API_URL}/api/send-enquiry`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        });
 
-        alert("Thank you! Your enquiry has been sent.");
+        if (response.ok) {
+            alert("Enquiry sent successfully!");
+        } else {
+            alert("Failed to send enquiry.");
+        }
 
         setFormData({
             name: "",
