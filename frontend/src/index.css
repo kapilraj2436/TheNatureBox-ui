@@ -60,3 +60,108 @@ select {
 .animate-slowZoom {
   animation: slowZoom 12s ease-in-out infinite alternate;
 }
+
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.packing-marquee-left {
+  animation: marqueeLeft 36s linear infinite;
+}
+
+.packing-marquee-right {
+  animation: marqueeRight 42s linear infinite;
+}
+
+.packing-marquee-left:hover,
+.packing-marquee-right:hover {
+  animation-play-state: paused;
+}
+
+@keyframes homePackFade {
+  0% {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+
+  5%,
+  21% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  26%,
+  100% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes spiceRibbonMove {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.home-pack-fade {
+  opacity: 0;
+  animation: homePackFade 16s ease-in-out infinite;
+}
+
+.spice-ribbon-track {
+  animation: spiceRibbonMove 18s linear infinite;
+}
+
+.masala-boundary {
+  background:
+    radial-gradient(circle at 10px 10px, rgba(252, 211, 77, 0.9) 0 2px, transparent 2px),
+    radial-gradient(circle at 30px 22px, rgba(250, 204, 21, 0.65) 0 1.5px, transparent 1.5px),
+    radial-gradient(circle at 46px 8px, rgba(120, 53, 15, 0.8) 0 2.5px, transparent 2.5px),
+    linear-gradient(90deg, #7f1d1d 0%, #b45309 28%, #92400e 52%, #166534 78%, #7f1d1d 100%);
+  background-size: 56px 32px, 56px 32px, 56px 32px, 100% 100%;
+}
+
+.masala-boundary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, transparent 0 42%, rgba(254, 240, 138, 0.55) 43% 47%, transparent 48% 100%),
+    linear-gradient(45deg, transparent 0 42%, rgba(254, 240, 138, 0.35) 43% 47%, transparent 48% 100%);
+  background-size: 34px 34px;
+  animation: spiceRibbonMove 10s linear infinite;
+  opacity: 0.8;
+}
+
+.masala-boundary::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 8px;
+  background:
+    radial-gradient(14px 8px at 14px 0, transparent 58%, #f6c45f 60% 69%, transparent 71%),
+    radial-gradient(14px 8px at 0 8px, transparent 58%, #f6c45f 60% 69%, transparent 71%);
+  background-size: 28px 8px;
+  animation: spiceRibbonMove 7s linear infinite;
+  opacity: 0.95;
+}
