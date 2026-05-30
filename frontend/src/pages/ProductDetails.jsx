@@ -14,18 +14,20 @@ export default function ProductDetails() {
     }
 
     return (
-        <div className="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-12">
+        <div className="max-w-6xl mx-auto px-4 py-10 md:py-20 grid md:grid-cols-2 gap-8 md:gap-12 items-start">
 
             {/* Image */}
-            <img
-                src={product.image}
-                alt={product.name}
-                className="w-full rounded-2xl shadow-md"
-            />
+            <div className="bg-gray-50 rounded-lg border p-3 sm:p-4">
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full max-h-[520px] md:max-h-[720px] object-contain rounded-lg"
+                />
+            </div>
 
             {/* Details */}
             <div>
-                <h1 className="text-3xl font-bold mb-4">
+                <h1 className="text-2xl sm:text-3xl font-bold mb-4">
                     {product.name}
                 </h1>
 
@@ -37,13 +39,23 @@ export default function ProductDetails() {
                     <strong>Weight:</strong> {product.weight}
                 </p>
 
-                <p className="text-2xl font-bold mb-6">
-                    ₹{product.price}
-                </p>
-
-                <button className="bg-green-700 text-white px-8 py-4 rounded-xl hover:bg-green-800">
-                    Login to Order
-                </button>
+                {product.features?.length > 0 && (
+                    <div className="mt-8">
+                        <h2 className="text-lg font-semibold mb-3">
+                            Product Highlights
+                        </h2>
+                        <ul className="grid gap-3 text-gray-700">
+                            {product.features.map((feature) => (
+                                <li
+                                    key={feature}
+                                    className="border border-green-100 bg-green-50 rounded-lg px-4 py-3"
+                                >
+                                    {feature}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </div>
 
         </div>
